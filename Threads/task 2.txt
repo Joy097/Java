@@ -1,0 +1,109 @@
+class task2 extends Thread{
+     
+     
+     public void run(){
+          System.out.println("The house is : "+Thread.currentThread().getName());
+          
+          if(Thread.currentThread().getName().equals("House stark") || Thread.currentThread().getName().equals("House targeriyan")){
+               try {
+                    
+                    Thread.sleep(1000);
+               } 
+               catch (InterruptedException e) {
+                   
+                    e.printStackTrace();
+               }
+          }
+          else if(Thread.currentThread().getName().equals("House lannister") || Thread.currentThread().getName().equals("House bolton")){
+               try {
+                    
+                    Thread.sleep(3000);
+               } 
+               catch (InterruptedException e) {
+                   
+                    e.printStackTrace();
+               }
+          }
+          else{
+               try {
+                 
+                    Thread.sleep(5000);
+               } 
+               catch (InterruptedException e) {
+                 
+                    e.printStackTrace();
+               }
+          }
+     }
+
+
+
+     public static void main(String[] args){
+       
+          task2 a=new task2();
+          task2 b=new task2();
+          task2 c=new task2();
+          task2 d=new task2();
+          task2 e=new task2();
+          
+          
+          Thread x = new Thread(a);
+          x.setPriority(Thread.MAX_PRIORITY);
+          x.setName("House stark");
+          
+          Thread y = new Thread(b);
+          y.setName("House targeriyan");
+          
+          Thread z = new Thread(c);
+          z.setName("House lannister");
+          
+          Thread m = new Thread(d);
+          m.setPriority(Thread.MIN_PRIORITY);
+          m.setName("House bolton");
+
+          
+          
+          if( !m.isAlive()){
+               System.out.println("You know nothing!");
+          }
+          
+          x.start();
+          
+          if( x.isAlive()){
+               System.out.println("Not Today!");
+          }
+          
+          y.start();
+          z.start();
+          m.start();
+          
+          
+          Thread t = new Thread(e);
+          t.setPriority(Thread.MAX_PRIORITY);
+          t.setName("House stark");
+
+          Thread n = new Thread(e);
+          n.setName("House tyrell");
+
+          
+          Thread s = new Thread(e);
+          s.setName("House lannister");
+          
+          Thread p = new Thread(e);
+          p.setPriority(Thread.MIN_PRIORITY);
+          p.setName("House bolton");
+          
+          if(!p.isAlive()){
+               System.out.println("You know nothing!");
+          }
+          
+          t.start();
+          n.start();
+          if( t.isAlive()){
+               System.out.println("Not Today!");
+          }
+          
+          s.start();
+          p.start();
+     }
+}

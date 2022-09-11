@@ -1,0 +1,40 @@
+class task1 extends Thread{
+     
+     private int a;
+     private int b;
+     
+     task1 (int a, int b)
+     {
+          this.a=a;
+          this.b=b;
+     
+        }
+     
+     public void run(){
+          String w = Thread.currentThread().getName();
+          
+          switch(w){
+
+               case "add":
+                    System.out.println("addition : "+(a+b) );
+                    break;
+
+               case "sub":
+                    System.out.println("subtraction : "+(a-b) );
+                    break;
+
+               case "mul":
+                    System.out.println("multiplication : "+(a*b) );
+                    break;
+
+               case "div":
+                    System.out.println("division : "+(a/b) );
+                    break;
+
+               default:
+                    System.out.println("No valid operation");
+          }
+     }
+}
+
+

@@ -1,0 +1,133 @@
+import java.util.*;
+
+class task3 extends Thread{
+     
+     private long odd1;
+     private long even1;
+     private long oddsum;
+     private long evensum;
+     private long average;
+     
+     private List<Integer> series=new ArrayList<Integer>();
+     
+     
+     task3(int a){
+          series.add(0);
+          series.add(1);
+          int val=0;
+          for(int i=2; i<a; ++i){
+               val = series.get(i-2)+series.get(i-1);
+               series.add(val);
+          }
+     }
+     
+     
+     public void run(){
+          String name = Thread.currentThread().getName();
+          switch(name){
+               case "odd1":
+                    Mean_of_odd1();
+                    System.out.println("mean of first odd numbers is : "+odd1);
+                    break;
+               case "even1":
+                    Mean_of_even1();
+                    System.out.println("mean of first even numbers is : "+even1);
+                    break;
+               case "oddsum":
+                    mean_of_oddsum();
+                    System.out.println("mean of second odd numbers is : "+oddsum);
+                    break;
+               case "evensum":
+                    Mean_of_evensum();
+                    System.out.println("mean of second even numbers is : "+evensum);
+                    break;
+               default:
+                    Mean_of_odd1();
+                    Mean_of_even1();
+                    mean_of_oddsum();
+                    Mean_of_evensum();
+                    average = (odd1 + even1 + oddsum + evensum) / 4;
+                    System.out.println("average of Means: "+average);
+          }
+     }
+     
+     
+     private void Mean_of_odd1(){
+          int c=0;
+          odd1=0;
+          
+          for(int i=0; i < (series.size()/2); i++){
+               if( series.get(i)%2 != 0){
+                    odd1=odd1+series.get(i);
+                    c++;
+               }
+          }
+          
+          odd1 = odd1 / c;
+     }
+     
+     
+     private void Mean_of_even1(){
+          int c=0;
+          even1=0;
+          
+          for(int i=0; i < (series.size()/2); i++){
+               if( series.get(i)%2 == 0){
+                    even1=even1+series.get(i);
+                    c++;
+               }
+          }
+          
+          even1 = even1 / c;
+     }
+     
+     
+     private void mean_of_oddsum(){
+          int c=0;
+          oddsum=0;
+          
+          for(int i= (series.size()/2)  ; i < series.size(); i++){
+               if( series.get(i)%2 != 0){
+                    oddsum=oddsum+series.get(i);
+                    c++;
+               }
+          }
+          
+          oddsum = oddsum / c ;
+     }
+     
+     
+     private void Mean_of_evensum(){
+          int c=0;
+          evensum=0;
+          
+          for(int i = (series.size() /2 ) ; i < series.size(); i++){
+               if( series.get(i)%2 == 0){
+                    evensum=evensum+series.get(i);
+                    c++;
+               }
+          }
+          
+          evensum = evensum / c ;
+     }
+     
+public static void main(String[] args){
+          task3 fs = new task3(10);
+          Thread x = new Thread(fs);
+          x.setName("odd1");
+          Thread y = new Thread(fs);
+          y.setName("even1");
+          Thread z = new Thread(fs);
+          z.setName("oddsum");
+          Thread m = new Thread(fs);
+          m.setName("evensum");
+          Thread n = new Thread(fs);
+          n.setName("average");
+          
+          x.start();
+          y.start();
+          z.start();
+          m.start();
+          n.start();
+     }
+}
